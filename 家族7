@@ -1,0 +1,50 @@
+ <!-- 新增成员弹窗 -->
+        <el-dialog v-model="state.dialogVisible" :title="state.dialogTitle" width="47%" :before-close="handleClose">
+            <el-form ref="addFormRef" :model="state.addForm" :rules="rules" label-width="120px">
+                <el-form-item label="用 户 名" prop="username">
+                    <el-input v-model="state.addForm.username" autocomplete="new-password"></el-input>
+                </el-form-item>
+                <el-form-item label="真实姓名" prop="username">
+                    <el-input v-model="state.addForm.trueName" autocomplete="new-password"></el-input>
+                </el-form-item>
+                <el-form-item label="头像">
+                    <el-upload class="avatar-uploader" :action="state.uploadPath" :show-file-list="false"
+                        :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                        <img v-if="state.currentImg" :src="state.currentImg" class="avatar" />
+                        <Icons v-else name="UploadFilled" class="avatar-uploader-icon" />
+                    </el-upload>
+                </el-form-item>
+                <el-form-item v-if="state.addForm.id == 0" label="密&nbsp;&nbsp;&nbsp;码" prop="password">
+                    <el-input v-model="state.addForm.password" type="password" autocomplete="new-password"
+                        show-password></el-input>
+                </el-form-item>
+                <el-form-item label="性别" prop="username">
+                    <el-select v-model="state.addForm.sex" placeholder="选择性别" style="width:100%">
+                        <el-option label="男" :value=0></el-option>
+                        <el-option label="女" :value=1></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="个人简介" prop="description">
+                    <el-input v-model="state.addForm.description" type="textarea" />
+                </el-form-item>
+                <el-form-item label="荣誉" prop="honor">
+                    <el-input v-model="state.addForm.honor" type="textarea" />
+                </el-form-item>
+                <el-form-item label="出生日期" prop="birth">
+                    <el-date-picker v-model="state.addForm.birth" style="width:100%" type="date"
+                        placeholder="请选择出生日期" />
+                </el-form-item>
+                <el-form-item label="家族" prop="familyId">
+                    <el-select v-model="state.addForm.familyId" placeholder="选择家族" style="width:100%">
+                        <el-option v-for="f in state.family" :key="f.ID" :label="f.familyName" :value="f.ID">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button type="primary" @click="handleSubmit('addFormRef')">提交</el-button>
+                    <el-button @click="clearForm()">关闭</el-button>
+                </span>
+            </template>
+        </el-dialog>
