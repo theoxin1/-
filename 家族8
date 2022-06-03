@@ -1,0 +1,50 @@
+export default {
+    setup() {
+        const imageWrapper = ref(null);
+        const store = useStore();
+        const { proxy } = getCurrentInstance()
+        //const richText = ref("");
+        const state = reactive({
+            input: '',
+            dialogVisible: false,
+            dialogTitle: '新增',
+            pageInfo: {
+                page: 1,
+                pageSize: 10,
+                userName: '',
+                familyId: 0,
+
+            },
+            total: 0,
+            tableData: [
+            ],
+            addForm: {
+                creater: store.getters.getUser.id,
+                username: '',
+                sex: 1,
+                password: '',
+                ID: 0,
+                trueName: '',
+                description: '',
+                honor: '',
+                birth: '',
+                familyId: 0,
+                headerImg: ''
+
+            },
+            defaultText: '',
+            family: [],
+            uploadPath: "http://localhost:8090/person/upload",
+            currentImg: '',
+            //穿梭框相关
+            rightValue: [],
+            transferData: [],
+            adddialogVisible: false,
+            adddialogTitle: "添加孩子",
+            addChildrenParentId: 0,
+            //添加伴侣相关
+            matedialogVisible: false,
+            matedialogTitle: '添加伴侣',
+            mateId: 0,
+            personId: 0,
+            mates:[]
